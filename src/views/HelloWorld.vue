@@ -6,17 +6,17 @@
 
 <script type="text/javascript">
 export default {
+    props: [],
     components: {},
     data() {
         return {};
     },
-    created() {
-    },
+    created() {},
     methods: {},
     computed: {},
     watch: {}
 };
 </script>
 
-<style lang="less" rel="stylesheet/less">
+<style scoped lang="less" rel="stylesheet/less">
 </style>
