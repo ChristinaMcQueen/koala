@@ -1,10 +1,10 @@
-const path = require('path');
-const utils = require('./utils');
-const config = require('../config');
-const vueLoaderConfig = require('./vue-loader.conf');
+var path = require('path');
+var utils = require('./utils');
+var config = require('../config');
+var vueLoaderConfig = require('./vue-loader.conf');
 
-function resolve(dir) {
-    return path.join(__dirname, '..', dir);
+function resolve (dir) {
+    return path.join(__dirname, '..', dir)
 }
 
 module.exports = {
@@ -26,7 +26,7 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.vue', '.json'],
         alias: {
-            vue$: 'vue/dist/vue.esm.js',
+            'vue$': 'vue/dist/vue.esm.js',
             '@': resolve('src')
         }
     },
@@ -38,7 +38,6 @@ module.exports = {
                 enforce: 'pre',
                 include: [resolve('src'), resolve('test')],
                 options: {
-                    // eslint-disable-next-line global-require
                     formatter: require('eslint-friendly-formatter')
                 }
             },

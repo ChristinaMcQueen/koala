@@ -1,55 +1,56 @@
 {
-  "env": {
-    "browser": true,
-    "node": true,
-    "es6": true
-  },
-  "root": true,
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "sourceType": "module"
-  },
-  "extends": "airbnb-base",
-  // required to lint *.vue files
-  "plugins": [
-    "html"
-  ],
-  // check if imports actually resolve
-  "settings": {
-    "import/resolver": {
-      "webpack": {
-        "config": "build/webpack.base.conf.js"
-      }
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    },
+    "root": true,
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "extends": "airbnb-base",
+    // required to lint *.vue files
+    "plugins": [
+        "html"
+    ],
+    // check if imports actually resolve
+    "settings": {
+        "import/resolver": {
+            "webpack": {
+                "config": "build/webpack.base.conf.js"
+            }
+        }
+    },
+    "rules": {
+        "import/extensions": ["error", "always", {
+            "js": "never",
+            "vue": "never"
+        }],
+        "no-param-reassign": ["error", {
+            "props": true,
+            "ignorePropertyModificationsFor": [
+                "state", // for vuex state
+                "ctx",
+                "acc", // for reduce accumulators
+                "e" // for e.returnvalue
+            ]
+        }],
+        "indent": ["error", 4, {
+            "SwitchCase": 1
+        }],
+        "array-bracket-spacing": ["error", "never"],
+        "strict": 0,
+        "comma-dangle": ["error", "never"],
+        "brace-style": [2, "stroustrup"],
+        "semi": ["error", "always"],
+        "max-len": ["error", {
+            "code": 120,
+            "ignoreUrls": true,
+            "ignoreStrings": true,
+            "ignoreComments": true,
+            "ignoreTemplateLiterals": true,
+            "ignoreRegExpLiterals": true
+        }]
     }
-  },
-  "rules": {
-    "import/extensions": ["error", "always", {
-      "js": "never",
-      "vue": "never"
-    }],
-    "no-param-reassign": ["error", {
-      "props": true,
-      "ignorePropertyModificationsFor": [
-        "state", // for vuex state
-        "acc", // for reduce accumulators
-        "e" // for e.returnvalue
-      ]
-    }],
-    "indent": ["error", 4, {
-      "SwitchCase": 1
-    }],
-    "array-bracket-spacing": ["error", "never"],
-    "strict": 0,
-    "comma-dangle": ["error", "never"],
-    "brace-style": [2, "stroustrup"],
-    "semi": ["error", "always"],
-    "max-len": ["error", {
-      "code": 120,
-      "ignoreUrls": true,
-      "ignoreStrings": true,
-      "ignoreComments": true,
-      "ignoreTemplateLiterals": true,
-      "ignoreRegExpLiterals": true
-    }]
-  }
 }

@@ -3,21 +3,23 @@ import path from 'path';
 import Koa from 'koa';
 import json from 'koa-json';
 import serve from 'koa-static';
-import middlewares from 'koa-middlewares';
+import middleware from 'koa-middlewares';
 
 import wrap from './middlewares/wrap';
 import crossDomain from './middlewares/crossDomain';
+
+import index from './router/index';
 
 const app = new Koa();
 const server = http.createServer(app.callback());
 const port = process.env.port || process.env.PORT || 8080;
 
 // middlewares
-middlewares.onerror(app);
-app.use(middlewares.bodyparser({
+middleware.onerror(app);
+app.use(middleware.bodyparser({
     enableTypes: ['json', 'form', 'text']
 }));
-app.use(middlewares.logger());
+app.use(middleware.logger());
 app.use(json());
 app.use(wrap());
 app.use(crossDomain);
@@ -31,9 +33,9 @@ app.use(async (ctx, next) => {
 });
 
 app.use(index.routes(), index.allowedMethods());
-app.use(config.routes(), config.allowedMethods());
-app.use(user.routes(), user.allowedMethods());
-app.use(coin.routes(), coin.allowedMethods());
-app.use(historyApiFallback());
-app.use(serve(path.resolve('dist')));
+// app.use(config.routes(), config.allowedMethods());
+// app.use(user.routes(), user.allowedMethods());
+// app.use(coin.routes(), coin.allowedMethods());
+// app.use(historyApiFallback());
+// app.use(serve(path.resolve('dist')));
 server.listen(port);
