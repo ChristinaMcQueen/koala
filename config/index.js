@@ -1,5 +1,5 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
-var path = require('path');
+const path = require('path');
 
 module.exports = {
     build: {
@@ -29,18 +29,8 @@ module.exports = {
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         proxyTable: {
-            '/config/*':{
-                target: 'http://[::1]:8980',
-                secure: false,
-                changeOrigin: true
-            },
-            '/user/*':{
-                target: 'http://[::1]:8980',
-                secure: false,
-                changeOrigin: true
-            },
-            '/coin/*':{
-                target: 'http://[::1]:8980',
+            '/api/*':{
+                target: 'http://[::1]:8988',
                 secure: false,
                 changeOrigin: true
             }

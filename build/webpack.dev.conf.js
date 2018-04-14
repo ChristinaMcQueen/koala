@@ -1,11 +1,11 @@
-const utils = require('./utils');
 const webpack = require('webpack');
-const config = require('../config');
 const merge = require('webpack-merge');
-const baseWebpackConfig = require('./webpack.base.conf');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const utils = require('./utils');
+const config = require('../config');
+const baseWebpackConfig = require('./webpack.base.conf');
 
 
 // add hot-reload related code to entry chunks

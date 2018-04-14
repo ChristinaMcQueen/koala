@@ -1,13 +1,11 @@
-require('@babel/register')({
-    '@babel/preset-env': [
+require('babel-core/register')({
+    presets: [
         ['env', {
-            node: 'current',
-            browsers: [
-                '> 1%',
-                'ie > 8'
-            ]
+            targets: {
+                node: true
+            }
         }]
     ]
 });
 
-require('./server/index');
+require('./server/server');

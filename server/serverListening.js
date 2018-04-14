@@ -1,9 +1,8 @@
 import http from 'http';
 
-
 export default (app) => {
     const server = http.createServer(app.callback());
-    let port = process.env.port || process.env.PORT || 8888;
+    let port = process.env.port || process.env.PORT || 8988;
 
     function onError(error) {
         if (error.syscall !== 'listen') {
