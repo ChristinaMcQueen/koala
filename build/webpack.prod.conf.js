@@ -18,6 +18,7 @@ var webpackConfig = merge(baseWebpackConfig, {
             extract: true
         })
     },
+    mode: 'production',
     devtool: config.build.productionSourceMap ? '#source-map' : false,
     output: {
         path: config.build.assetsRoot,

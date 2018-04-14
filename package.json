@@ -4,8 +4,11 @@
     "description": "A koa project",
     "main": "index.js",
     "scripts": {
-        "client": "node build/dev-server.js",
-        "dev": "nodemon app",
+        "build": "yarn run clean && node build/build.js",
+        "clean": "rimraf ./dist/*",
+        "dev": "cross-env NODE_ENV=development nodemon build/dev-server.js --watch server --watch src",
+        "lint": "eslint --ext .js,.vue src test/unit",
+        "start": "cross-env NODE_ENV=production node ./app.js",
         "test": "npm run unit"
     },
     "repository": {
