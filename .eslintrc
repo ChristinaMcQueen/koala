@@ -36,6 +36,7 @@
                 "e" // for e.returnvalue
             ]
         }],
+        "no-new": "off",
         "indent": ["error", 4, {
             "SwitchCase": 1
         }],

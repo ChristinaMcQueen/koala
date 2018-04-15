@@ -14,7 +14,7 @@ module.exports = {
         dns: 'empty'
     },
     entry: {
-        client: './src/main.js'
+        bundle: './src/main.js'
     },
     output: {
         path: config.build.assetsRoot,

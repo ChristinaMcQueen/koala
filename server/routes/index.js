@@ -1,6 +1,11 @@
 const router = require('koa-router')();
 
+router.prefix('/api');
 router.options('/*', async (ctx) => {
+    ctx.body = { message: 'success' };
+});
+
+router.get('/*', async (ctx) => {
     ctx.body = { message: 'success' };
 });
 

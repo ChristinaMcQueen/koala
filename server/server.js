@@ -6,7 +6,7 @@ import json from 'koa-json';
 import serve from 'koa-static';
 import historyApiFallback from 'koa2-history-api-fallback';
 
-// import index from './routes/index';
+import index from './routes/index';
 import file from './routes/file';
 
 import startApp from './serverListening';
@@ -27,7 +27,7 @@ app.use(wrap());
 app.use(crossDomain);
 
 // routes
-// app.use(index.routes(), index.allowedMethods());
+app.use(index.routes(), index.allowedMethods());
 app.use(file.routes(), file.allowedMethods());
 app.use(historyApiFallback());
 app.use(serve(path.resolve('dist')));
