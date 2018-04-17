@@ -10,7 +10,6 @@ const publicPath = path.resolve(__dirname, 'public');
 shell.mkdir('-p', publicPath);
 
 const readSync = (ctx) => {
-    // const filePath = publicPath;
     const fileList = fs.readdirSync(publicPath);
     const content = [];
     fileList.forEach((fileName) => {
@@ -45,8 +44,8 @@ const readEvent = (ctx) => {
         console.log(fileList);
         fileList.forEach((fileName) => {
             const filePath = path.resolve(publicPath, fileName);
-            fs.readFile(filePath, 'utf8', (error, file) => {
-                if (error) throw new Error(`Read File '${filePath}' Error`);
+            fs.readFile(filePath, 'utf8', (err, file) => {
+                if (err) throw new Error(`Read File '${filePath}' Error`);
                 console.log(file.replace('\n', ''));
             });
         });
@@ -64,8 +63,8 @@ const readPubSub = (ctx) => {
     emitter.on('readFile', (fileList) => {
         fileList.forEach((fileName) => {
             const filePath = path.resolve(publicPath, fileName);
-            fs.readFile(filePath, 'utf8', (error, file) => {
-                if (error) throw new Error(`Read File '${filePath}' Error`);
+            fs.readFile(filePath, 'utf8', (err, file) => {
+                if (err) throw new Error(`Read File '${filePath}' Error`);
                 console.log(file.replace('\n', ''));
             });
         });
@@ -91,10 +90,34 @@ const readPromise = (ctx) => {
     ctx.body = { content: 'promise' };
 };
 
+const readGenerator = (ctx) => {
+    function* ReadFile(fileList) {
+        yield fileList.forEach((fileName) => {
+            const filePath = path.resolve(publicPath, fileName);
+            fs.readFile(filePath, 'utf8', (err, file) => {
+                if (err) throw new Error(`Read File '${filePath}' Error`);
+                console.log(file.replace('\n', ''));
+            });
+        });
+    }
+    function* ReadDir() {
+        yield fs.readdir(publicPath, (err, fileList) => {
+            if (err) throw new Error(`Read Dir '${publicPath}' Error`);
+            console.log(fileList);
+            const readFile = ReadFile(fileList);
+            readFile.next();
+        });
+    }
+    const readDir = ReadDir();
+    readDir.next();
+    ctx.body = { content: 'generator' };
+};
+
 export default {
     readSync,
     readCallback,
     readEvent,
     readPubSub,
-    readPromise
+    readPromise,
+    readGenerator
 };

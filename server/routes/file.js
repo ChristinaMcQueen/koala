@@ -11,4 +11,5 @@ router.get('/read/callback', file.readCallback);
 router.get('/read/event', file.readEvent);
 router.get('/read/pubsub', file.readPubSub);
 router.get('/read/promise', file.readPromise);
+router.get('/read/generator', file.readGenerator);
 module.exports = router;

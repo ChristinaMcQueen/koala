@@ -42,5 +42,6 @@ router.get('/read/callback', _file2.default.readCallback);
 router.get('/read/event', _file2.default.readEvent);
 router.get('/read/pubsub', _file2.default.readPubSub);
 router.get('/read/promise', _file2.default.readPromise);
+router.get('/read/generator', _file2.default.readGenerator);
 module.exports = router;
 //# sourceMappingURL=file.js.map

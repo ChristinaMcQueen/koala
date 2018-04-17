@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
 var _promise = require('babel-runtime/core-js/promise');
 
 var _promise2 = _interopRequireDefault(_promise);
@@ -35,7 +39,6 @@ var publicPath = _path2.default.resolve(__dirname, 'public'); /* eslint-disable 
 _shelljs2.default.mkdir('-p', publicPath);
 
 var readSync = function readSync(ctx) {
-    // const filePath = publicPath;
     var fileList = _fs2.default.readdirSync(publicPath);
     var content = [];
     fileList.forEach(function (fileName) {
@@ -70,8 +73,8 @@ var readEvent = function readEvent(ctx) {
         console.log(fileList);
         fileList.forEach(function (fileName) {
             var filePath = _path2.default.resolve(publicPath, fileName);
-            _fs2.default.readFile(filePath, 'utf8', function (error, file) {
-                if (error) throw new Error('Read File \'' + filePath + '\' Error');
+            _fs2.default.readFile(filePath, 'utf8', function (err, file) {
+                if (err) throw new Error('Read File \'' + filePath + '\' Error');
                 console.log(file.replace('\n', ''));
             });
         });
@@ -89,8 +92,8 @@ var readPubSub = function readPubSub(ctx) {
     emitter.on('readFile', function (fileList) {
         fileList.forEach(function (fileName) {
             var filePath = _path2.default.resolve(publicPath, fileName);
-            _fs2.default.readFile(filePath, 'utf8', function (error, file) {
-                if (error) throw new Error('Read File \'' + filePath + '\' Error');
+            _fs2.default.readFile(filePath, 'utf8', function (err, file) {
+                if (err) throw new Error('Read File \'' + filePath + '\' Error');
                 console.log(file.replace('\n', ''));
             });
         });
@@ -126,11 +129,62 @@ var readPromise = function readPromise(ctx) {
     ctx.body = { content: 'promise' };
 };
 
+var readGenerator = function readGenerator(ctx) {
+    var _marked = /*#__PURE__*/_regenerator2.default.mark(ReadFile),
+        _marked2 = /*#__PURE__*/_regenerator2.default.mark(ReadDir);
+
+    function ReadFile(fileList) {
+        return _regenerator2.default.wrap(function ReadFile$(_context) {
+            while (1) {
+                switch (_context.prev = _context.next) {
+                    case 0:
+                        _context.next = 2;
+                        return fileList.forEach(function (fileName) {
+                            var filePath = _path2.default.resolve(publicPath, fileName);
+                            _fs2.default.readFile(filePath, 'utf8', function (err, file) {
+                                if (err) throw new Error('Read File \'' + filePath + '\' Error');
+                                console.log(file.replace('\n', ''));
+                            });
+                        });
+
+                    case 2:
+                    case 'end':
+                        return _context.stop();
+                }
+            }
+        }, _marked, this);
+    }
+    function ReadDir() {
+        return _regenerator2.default.wrap(function ReadDir$(_context2) {
+            while (1) {
+                switch (_context2.prev = _context2.next) {
+                    case 0:
+                        _context2.next = 2;
+                        return _fs2.default.readdir(publicPath, function (err, fileList) {
+                            if (err) throw new Error('Read Dir \'' + publicPath + '\' Error');
+                            console.log(fileList);
+                            var readFile = ReadFile(fileList);
+                            readFile.next();
+                        });
+
+                    case 2:
+                    case 'end':
+                        return _context2.stop();
+                }
+            }
+        }, _marked2, this);
+    }
+    var readDir = ReadDir();
+    readDir.next();
+    ctx.body = { content: 'generator' };
+};
+
 exports.default = {
     readSync: readSync,
     readCallback: readCallback,
     readEvent: readEvent,
     readPubSub: readPubSub,
-    readPromise: readPromise
+    readPromise: readPromise,
+    readGenerator: readGenerator
 };
 //# sourceMappingURL=file.js.map
