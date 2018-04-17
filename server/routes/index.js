@@ -5,8 +5,4 @@ router.options('/*', async (ctx) => {
     ctx.body = { message: 'success' };
 });
 
-router.get('/*', async (ctx) => {
-    ctx.body = { message: 'success' };
-});
-
 module.exports = router;

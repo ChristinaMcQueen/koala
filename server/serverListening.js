@@ -31,7 +31,8 @@ export default (app) => {
         const bind = typeof addr === 'string'
             ? `pipe ${addr}`
             : `port ${addr.port}`;
-        console.log(`\n❄️❄️❄️Listening on ${bind} ❄️❄️❄️\n`);
+        // console.log(`\n❄️ ❄️ ❄️  Listening on ${bind}️  ❄️ ❄️ ❄️\n`); // ❄
+        console.log(`\n🦄 🦄 🦄 Listening on ${bind}️\n`);
     }
 
     server.listen(port);

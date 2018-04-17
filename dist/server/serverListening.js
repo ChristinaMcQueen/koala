@@ -37,7 +37,8 @@ exports.default = function (app) {
     function onListening() {
         var addr = server.address();
         var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
-        console.log('\n\u2744\uFE0F\u2744\uFE0F\u2744\uFE0FListening on ' + bind + ' \u2744\uFE0F\u2744\uFE0F\u2744\uFE0F\n');
+        // console.log(`\n❄️ ❄️ ❄️  Listening on ${bind}️  ❄️ ❄️ ❄️\n`); // ❄
+        console.log('\n\uD83E\uDD84 \uD83E\uDD84 \uD83E\uDD84 Listening on ' + bind + '\uFE0F\n');
     }
 
     server.listen(port);
