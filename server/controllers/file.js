@@ -113,11 +113,33 @@ const readGenerator = (ctx) => {
     ctx.body = { content: 'generator' };
 };
 
+const readAsync = async (ctx) => {
+    const getFileList = async () => new Promise((resolve, reject) => {
+        fs.readdir(publicPath, (err, fileList) => (err ? reject(err) : resolve(fileList)));
+    });
+    const getFileContent = async filePath => new Promise((resolve, reject) => {
+        fs.readFile(filePath, 'utf8', (err, content) => (err ? reject(err) : resolve(content.replace('\n', ''))));
+    });
+    const fileList = await getFileList();
+    const content = await Promise.all(fileList.map(async (fileName) => {
+        const filePath = path.resolve(publicPath, fileName);
+        try {
+            return await getFileContent(filePath);
+        }
+        catch (err) {
+            console.log(err);
+            return err;
+        }
+    }));
+    ctx.body = { content: content.join(', ') };
+};
+
 export default {
     readSync,
     readCallback,
     readEvent,
     readPubSub,
     readPromise,
-    readGenerator
+    readGenerator,
+    readAsync
 };

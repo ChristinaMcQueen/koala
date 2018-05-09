@@ -12,4 +12,5 @@ router.get('/read/event', file.readEvent);
 router.get('/read/pubsub', file.readPubSub);
 router.get('/read/promise', file.readPromise);
 router.get('/read/generator', file.readGenerator);
+router.get('/read/async', file.readAsync);
 module.exports = router;
