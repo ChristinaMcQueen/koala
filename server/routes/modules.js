@@ -6,6 +6,6 @@ router.prefix('/api/module');
 router.options('/*', async (ctx) => {
     ctx.body = { message: 'success' };
 });
-router.get('/circular/commonjs', modules.commonjs);
-router.get('/circular/import', modules.esImport);
+// router.get('/circular/commonjs', modules.commonjs);
+// router.get('/circular/import', modules.esImport);
 module.exports = router;

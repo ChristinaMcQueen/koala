@@ -8,7 +8,8 @@ import historyApiFallback from 'koa2-history-api-fallback';
 
 import index from './routes/index';
 import file from './routes/file';
-import modules from './routes/modules';
+import mockup from './routes/mockup';
+// import modules from './routes/modules';
 
 import startApp from './serverListening';
 import crossDomain from './middlewares/crossDomain';
@@ -30,7 +31,8 @@ app.use(crossDomain);
 // routes
 app.use(index.routes(), index.allowedMethods());
 app.use(file.routes(), file.allowedMethods());
-app.use(modules.routes(), modules.allowedMethods());
+app.use(mockup.routes(), mockup.allowedMethods());
+// app.use(modules.routes(), modules.allowedMethods());
 app.use(historyApiFallback());
 app.use(serve(path.resolve('dist')));
 
